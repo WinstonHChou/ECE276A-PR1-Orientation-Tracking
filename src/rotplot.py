@@ -25,7 +25,7 @@ def rotplot(R,currentAxes=None):
 		ax = currentAxes
 	else:
 		fig = plt.figure()
-		ax = fig.gca(projection='3d')
+		ax = fig.add_subplot(projection = '3d')
 
 	ax.plot(xp[0,itop], xp[1,itop], xp[2,itop], 'k-')
 	ax.plot(xp[0,ibottom], xp[1,ibottom], xp[2,ibottom], 'k-')
