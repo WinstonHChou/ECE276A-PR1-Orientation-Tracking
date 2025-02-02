@@ -17,9 +17,9 @@ def read_data(fname):
   return d
 
 dataset="1"
-cfile = "../data/cam/cam" + dataset + ".p"
-ifile = "../data/imu/imuRaw" + dataset + ".p"
-vfile = "../data/vicon/viconRot" + dataset + ".p"
+cfile = "../data/trainset/cam/cam" + dataset + ".p"
+ifile = "../data/trainset/imu/imuRaw" + dataset + ".p"
+vfile = "../data/trainset/vicon/viconRot" + dataset + ".p"
 
 ts = tic()
 camd = read_data(cfile)
