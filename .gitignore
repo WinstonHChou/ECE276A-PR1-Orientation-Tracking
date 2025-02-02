@@ -171,5 +171,5 @@ cython_debug/
 .pypirc
 
 # Project 1
-trainset/**
-testset/**
+**/trainset/**
+**/testset/**
