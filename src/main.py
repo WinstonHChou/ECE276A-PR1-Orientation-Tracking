@@ -70,18 +70,13 @@ if __name__ == "__main__":
     stepSize = float(args['stepSize'])
     rough = bool(args['rough'])
 
-    print(f"[Progress Report]: Processing Dataset #{dataset} - iterations: {iterations}, step size: {stepSize}")
-    
-    cfile = f'{file_dir}/../data/trainset/cam/cam{dataset}.p'
-    ifile = f'{file_dir}/../data/trainset/imu/imuRaw{dataset}.p'
-    vfile = f'{file_dir}/../data/trainset/vicon/viconRot{dataset}.p'
-
     ### Types of dataset: 
     #   1. imu, camera & groundtruth
     #   2. imu & groundtruth
     #   3. imu & camera   (test data)
     hasCamera = False
     hasGroundTruth = False
+    dataset_folder = 'trainset'
 
     if dataset == 1 or dataset == 2 or dataset == 8 or dataset == 9:
         print("[Progress Report]: Dataset-Type: Panorama Stitch & GroundTruth")
@@ -95,6 +90,13 @@ if __name__ == "__main__":
     elif dataset > 9:
         print("[Progress Report]: Dataset-Type: Panorama Stitch Only")
         hasCamera = True
+        dataset_folder = 'testset'
+
+    print(f"[Progress Report]: Processing Dataset #{dataset} - iterations: {iterations}, step size: {stepSize}")
+    
+    cfile = f'{file_dir}/../data/{dataset_folder}/cam/cam{dataset}.p'
+    ifile = f'{file_dir}/../data/{dataset_folder}/imu/imuRaw{dataset}.p'
+    vfile = f'{file_dir}/../data/{dataset_folder}/vicon/viconRot{dataset}.p'
 
     ### Read imu data
     imu_data = read_data(ifile)
@@ -113,6 +115,8 @@ if __name__ == "__main__":
     # print(calibrated_imu_data)
 
     ### Read Camera/GroundTruth data depending on the dataset
+    cam_data = None
+    vicon_data = None
     if hasCamera:
         cam_data = read_data(cfile)
         # print(cam_data.keys())
@@ -158,7 +162,7 @@ if __name__ == "__main__":
     plot_acceleration(accel_prior, accel_meas, observationModel(Q_iters[-1]), dataset)
 
     if not hasGroundTruth:
-        vicon_data = {'ts': imu_data[0, :R.shape[1]], 'rots': jnp.zeros((3, 3, R.shape[1]))}
+        vicon_data = {'ts': imu_data[0, :R.shape[1]], 'rots': np.zeros((3, 3, R.shape[1]))}
         for i, r in enumerate(R.T):
             vicon_data['rots'][:, :, i] = transforms3d.euler.euler2mat(r[0], r[1], r[2])
 
