@@ -35,15 +35,16 @@ The project involves processing IMU, VICON, and camera data to:
 
 ## Running the Project
 ### Standard Run:
+- __`dataset=1`__: Select dataset number (1-11)
 ```python
 python3 src/main.py dataset=1
 ```
 ### Optional Arguments:
-- `dataset=1`: Select dataset number (1-11)
-- `iterations=1`: Select desired iterations (Default: 300)
-- `stepSize=1`: Select desired step size (Default: 0.025)
-- `rough=true`: Choose to roughly plot the panorama
-Example:
+- __`iterations=1`__: Select desired iterations (Default: 300)
+- __`stepSize=1`__: Select desired step size (Default: 0.025)
+- __`rough=true`__: Choose to roughly plot the panorama
+
+__Example:__
 ```python
 python3 src/main.py dataset=1 iterations=150 stepSize=0.05 rough=true
 ```
@@ -54,30 +55,29 @@ python3 src/main.py dataset=1 iterations=150 stepSize=0.05 rough=true
 
 ## Output Graphs
 ### Euler Angles Comparison
-- Predicted quaternions from Motion Model with IMU's angular velocities as input
-- Gradient descent processed quaternions
-- VICON data as Ground Truth
+1. Predicted quaternions from Motion Model with IMU's angular velocities as input
+2. Gradient descent processed quaternions
+3. VICON data as Ground Truth
 
 ### Linear Acceleration Comparison
-- Linear acceleration from predicted quaternions using Observation Model
-- Linear acceleration from Gradient descent processed quaternions using Observation Model
-- Raw IMU data
+1. Linear acceleration from predicted quaternions using Observation Model
+2. Linear acceleration from Gradient descent processed quaternions using Observation Model
+3. IMU data (bias corrected)
 
 ## Sample Results (Dataset 2)
 ### Euler Angles Comparison
-Euler Angles Comparison:
 ![image](assets/2_AngVel.jpg)
 
 ### Linear Acceleration Comparison
-Linear Acceleration Comparison:
 ![image](assets/2_Accel.jpg)
 
 ### Panorama
 ![image](assets/panorama_2.jpg)
 
 ## Technical Details
-- Quaternions and rotation matrices converted using transforms3d
+- Quaternions and rotation matrices converted using `transforms3d`
+- Plots done by using `matplotlib`
 - Gradient descent used for IMU data refinement
 
 ## Acknowledgments
-This project is part of the ECE 276A course at UCSD, which is inspired by the teaching and research of various professors in the field of robotics and estimation
+This project is part of the **ECE 276A** course at **UC San Diego**, which is inspired by the teaching and research of various professors in the field of robotics and estimation
