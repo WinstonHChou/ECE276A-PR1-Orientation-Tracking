@@ -51,7 +51,7 @@ python3 src/main.py dataset=1 iterations=150 stepSize=0.05 rough=true
 
 ## Features
 - Datasets are labelled 1-11 (10, 11 are from `data/testset/`)
-- Generates **spherical projection panorama images** for datasets 1, 2, 8, 9, 10, 11
+- Generates **cylindrical projection panorama images** for datasets 1, 2, 8, 9, 10, 11
 
 ## Output Graphs
 ### Euler Angles Comparison
