@@ -2,7 +2,7 @@
 WI 25 ECE 276A Project 1: Orientation Tracking
 
 ## Course Overview
-This is Project 1 for [ECE 276A: Sensing & Estimation in Robotics](https://natanaso.github.io/ece276a/) at UCSD, taught by Professor [Nikolay Atanisov](https://natanaso.github.io/).
+This is Project 1 for [ECE 276A: Sensing & Estimation in Robotics](https://natanaso.github.io/ece276a/) at UCSD, taught by Professor [Nikolay Atanasov](https://natanaso.github.io/).
 
 ## Project Description
 The project involves processing IMU, VICON, and camera data to:
