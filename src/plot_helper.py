@@ -80,17 +80,14 @@ def create_panorama(vicon_data, cam_data, rough=False):
     for i in range(theta.shape[0]):
         cartesian_temp[:, i, 3] = np.sin(phi)
 
-    cartesian[:, :, 0] = np.multiply(
-        cartesian_temp[:, :, 3], cartesian_temp[:, :, 0])
-    cartesian[:, :, 1] = np.multiply(
-        cartesian_temp[:, :, 3], cartesian_temp[:, :, 2])
+    cartesian[:, :, 0] = np.multiply(cartesian_temp[:, :, 3], cartesian_temp[:, :, 0])
+    cartesian[:, :, 1] = np.multiply(cartesian_temp[:, :, 3], cartesian_temp[:, :, 2])
     cartesian[:, :, 2] = cartesian_temp[:, :, 1]
     print('Created cartesian coordinates map')
 
     world_frame_cartesian = np.zeros((PIXEL_V, PIXEL_H, 3, len(cam_time_map.keys())))
     for i in range(cam_data['cam'].shape[3]):
-        world_frame_cartesian[:, :, :, i] = np.dot(
-            cartesian, vicon_data['rots'][:, :, cam_time_map[cam_data['ts'][0][i]]])
+        world_frame_cartesian[:, :, :, i] = np.dot(cartesian, vicon_data['rots'][:, :, cam_time_map[cam_data['ts'][0][i]]])
     print('Created world frame')
 
     del cartesian_temp, cartesian, phi, theta, cam_time_map
@@ -99,10 +96,8 @@ def create_panorama(vicon_data, cam_data, rough=False):
 
     spherical_from_cartesian_r = np.linalg.norm(world_frame_cartesian, axis=2)
     spherical_from_cartesian[:, :, 0,:] = spherical_from_cartesian_r  # rho => z
-    spherical_from_cartesian[:, :, 1, :] = np.arctan2(
-        world_frame_cartesian[:, :, 1, :], world_frame_cartesian[:, :, 0, :])  # theta => x
-    spherical_from_cartesian[:, :, 2, :] = np.arccos(
-        world_frame_cartesian[:, :, 2, :]/spherical_from_cartesian_r)  # phi => y
+    spherical_from_cartesian[:, :, 1, :] = np.arctan2(world_frame_cartesian[:, :, 1, :], world_frame_cartesian[:, :, 0, :])  # theta => x
+    spherical_from_cartesian[:, :, 2, :] = np.arccos(world_frame_cartesian[:, :, 2, :]/spherical_from_cartesian_r)  # phi => y
     del spherical_from_cartesian_r
 
     sx, sy = (2*np.pi/WIDTH), (np.pi/HEIGHT)

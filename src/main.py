@@ -162,7 +162,7 @@ if __name__ == "__main__":
     plot_acceleration(accel_prior, accel_meas, observationModel(Q_iters[-1]), dataset)
 
     if not hasGroundTruth:
-        vicon_data = {'ts': imu_data[0, :R.shape[1]], 'rots': np.zeros((3, 3, R.shape[1]))}
+        vicon_data = {'ts': imu_data[:, :R.shape[1]], 'rots': np.zeros((3, 3, R.shape[1]))}
         for i, r in enumerate(R.T):
             vicon_data['rots'][:, :, i] = transforms3d.euler.euler2mat(r[0], r[1], r[2])
 
